@@ -1,0 +1,15 @@
+{
+  "name": "tse",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@thoughtspot/visual-embed-sdk": "^1.32.4"
+  }
+}

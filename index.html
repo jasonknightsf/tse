@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThoughtSpot Embed Demo</title>
+    <title>ThoughtSpot Liveboard Embed</title>
     <style>
         body {
             margin: 0;
-            font-family: Helvetica, Arial, sans-serif; /* Apply Helvetica globally */
-            background-color: #fff; /* Light grey background for the entire page */
+            font-family: Helvetica, Arial, sans-serif;
+            background-color: #f0f0f0;
         }
         .header {
             background-color: black;
@@ -21,27 +21,51 @@
             box-sizing: border-box;
         }
         .content {
-            background-color: #f8f8f8; /* White background for the content area */
-            margin: 20px auto; /* Center the content area */
+            background-color: #ffffff;
+            margin: 20px auto;
             padding: 20px;
-            width: 80%; /* Adjust the width of the content area */
-            max-width: 1200px; /* Limit the maximum width for larger screens */
-            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/ /* Optional: Add a subtle shadow for better visibility */
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
-            border-radius: 8px; /* Optional: Add rounded corners */
+            border-radius: 8px;
+        }
+        #ts-embed {
+            width: 100%;
+            height: 500px;
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        ThoughtSpot TSE
+        ThoughtSpot Liveboard Embed Demo
     </div>
 
     <div class="content">
-        <!-- Your main content goes here -->
-        <p>Welcome to the ThoughtSpot Embed Demo. Explore the powerful analytics capabilities embedded right into your applications.</p>
+        <h1>Embedded Liveboard</h1>
+        <div id="ts-embed"></div>
     </div>
+
+    <script src="node_modules/@thoughtspot/visual-embed-sdk/dist/tsembed.umd.js"></script>
+    <script>
+        const tsEmbed = window['@thoughtspot/visual-embed-sdk'];
+
+        tsEmbed.init({
+            thoughtSpotHost: 'https://try.thoughtspot.cloud',
+            authType: tsEmbed.AuthType.None,
+        });
+
+        const embed = new tsEmbed.LiveboardEmbed('#ts-embed', {
+            liveboardId: '[YOUR_LIVEBOARD_ID]', // Replace with your actual Liveboard ID
+            frameParams: {
+                height: '100%',
+                width: '100%',
+            },
+        });
+
+        embed.render();
+    </script>
 
 </body>
 </html>
