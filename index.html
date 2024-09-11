@@ -30,7 +30,7 @@
             box-sizing: border-box;
             border-radius: 8px;
         }
-        #ts-embed {
+        #container {
             width: 100%;
             height: 500px;
         }
@@ -44,27 +44,31 @@
 
     <div class="content">
         <h1>Embedded Liveboard</h1>
-        <div id="ts-embed"></div>
+        <div id="container"></div>
     </div>
 
+    <!-- Import the ThoughtSpot Visual Embed SDK -->
     <script src="node_modules/@thoughtspot/visual-embed-sdk/dist/tsembed.umd.js"></script>
     <script>
-        const tsEmbed = window['@thoughtspot/visual-embed-sdk'];
+        const { LiveboardEmbed, AuthType, init } = window['@thoughtspot/visual-embed-sdk'];
 
-        tsEmbed.init({
-            thoughtSpotHost: 'https://try.thoughtspot.cloud',
-            authType: tsEmbed.AuthType.None,
+        // Initialize the SDK
+        init({
+            thoughtSpotHost: 'https://team3.thoughtspot.cloud', // Replace with your actual ThoughtSpot host
+            authType: AuthType.None,
         });
 
-        const embed = new tsEmbed.LiveboardEmbed('#ts-embed', {
-            liveboardId: '[YOUR_LIVEBOARD_ID]', // Replace with your actual Liveboard ID
+        // Embed the Liveboard
+        const lb = new LiveboardEmbed('#container', {
             frameParams: {
-                height: '100%',
                 width: '100%',
+                height: '100%',
             },
+            liveboardId: 'd084c256-e284-4fc4-b80c-111cb606449a', // Replace with your actual Liveboard ID
         });
 
-        embed.render();
+        // Render the Liveboard
+        lb.render();
     </script>
 
 </body>
