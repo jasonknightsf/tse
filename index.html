@@ -39,7 +39,7 @@
 <body>
 
     <div class="header">
-        ThoughtSpot Liveboard Embed Demo - JASON
+        ThoughtSpot Liveboard Embed Demo
     </div>
 
     <div class="content">
@@ -47,11 +47,11 @@
         <div id="container"></div>
     </div>
 
-    <!-- Load the ThoughtSpot Visual Embed SDK from a CDN -->
+    <!-- Import the ThoughtSpot Visual Embed SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@thoughtspot/visual-embed-sdk/dist/tsembed.umd.js"></script>
     <script>
-        import { LiveboardEmbed, AuthType,init,
-                } from '@thoughtspot/visual-embed-sdk';
+        // Access the SDK components from the global window object
+        const { LiveboardEmbed, AuthType, init } = window['@thoughtspot/visual-embed-sdk'];
 
         // Initialize the SDK
         init({
