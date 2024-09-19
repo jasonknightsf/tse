@@ -11,7 +11,7 @@
             background-color: #f0f0f0;
         }
         .header {
-            background-color: #666666;
+            background-color: #black;
             color: white;
             height: 50px;
             display: flex;
@@ -52,26 +52,37 @@
 
     <!-- Embed ThoughtSpot Liveboard -->
     <script>
-        // Import the SDK components from the global window object
-        const { LiveboardEmbed, AuthType, init } = window['@thoughtspot/visual-embed-sdk'];
+        window.addEventListener('load', function() {
+            // Check if SDK is loaded
+            const tsSdk = window['@thoughtspot/visual-embed-sdk'];
+            console.log('ThoughtSpot SDK:', tsSdk);  // Debugging log
 
-        // Initialize the SDK
-        init({
-            thoughtSpotHost: 'https://team2.thoughtspot.cloud', // Replace with your ThoughtSpot free trial host URL
-            authType: AuthType.None, // Using None for testing purposes
+            if (!tsSdk) {
+                console.error('ThoughtSpot Visual Embed SDK failed to load.');
+                return;
+            }
+
+            // Import the SDK components from the global window object
+            const { LiveboardEmbed, AuthType, init } = tsSdk;
+
+            // Initialize the SDK
+            init({
+                thoughtSpotHost: 'https://team2.thoughtspot.cloud', // Replace with your ThoughtSpot free trial host URL
+                authType: AuthType.None, // Using None for testing purposes
+            });
+
+            // Embed the Liveboard
+            const liveboardEmbed = new LiveboardEmbed('#ts-embed', {
+                frameParams: {
+                    width: '100%',
+                    height: '100%',
+                },
+                liveboardId: 'd084c256-e284-4fc4-b80c-111cb606449a', // Replace with your actual Liveboard ID
+            });
+
+            // Render the Liveboard
+            liveboardEmbed.render();
         });
-
-        // Step 4: Embed the Liveboard
-        const liveboardEmbed = new LiveboardEmbed('#ts-embed', {
-            frameParams: {
-                width: '100%',
-                height: '100%',
-            },
-            liveboardId: 'd084c256-e284-4fc4-b80c-111cb606449a', // Replace with your actual Liveboard ID
-        });
-
-        // Do not forget to call render
-        liveboardEmbed.render();
     </script>
 
 </body>
