@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThoughtSpot Liveboard Embed</title>
+    <title>ThoughtSpot Embed Demo</title>
     <style>
         body {
             margin: 0;
@@ -11,7 +11,7 @@
             background-color: #f0f0f0;
         }
         .header {
-            background-color: black;
+            background-color: #333333;
             color: white;
             height: 50px;
             display: flex;
@@ -21,36 +21,58 @@
             box-sizing: border-box;
         }
         .content {
-            background-color: #ffffff;
             margin: 20px auto;
             padding: 20px;
             width: 80%;
             max-width: 1200px;
+            background-color: #ffffff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
             border-radius: 8px;
         }
-        #container {
+        #ts-embed {
             width: 100%;
-            height: 500px;
+            height: 600px;
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        ThoughtSpot Liveboard Embed Demo
+        ThoughtSpot Embed Demo
     </div>
 
     <div class="content">
-        <h1>Embedded Liveboard - JASON 2</h1>
-        <div id="container"></div>
+        <h1>Embedded ThoughtSpot Liveboard</h1>
+        <div id="ts-embed"></div>
     </div>
 
-    <!-- <script src="index.js"></script> -->
-    <!-- <script src="script.js"></script> -->
-    <!-- <div id="embed" style="height: 100vh; width: 100vw"></div> -->
+    <!-- Load the ThoughtSpot Visual Embed SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@thoughtspot/visual-embed-sdk@latest/dist/tsembed.js"></script>
 
+    <!-- Embed ThoughtSpot Liveboard -->
+    <script>
+        // Import the SDK components from the global window object
+        const { LiveboardEmbed, AuthType, init } = window['@thoughtspot/visual-embed-sdk'];
+
+        // Initialize the SDK
+        init({
+            thoughtSpotHost: 'https://team2.thoughtspot.cloud', // Replace with your ThoughtSpot free trial host URL
+            authType: AuthType.None, // Using None for testing purposes
+        });
+
+        // Step 4: Embed the Liveboard
+        const liveboardEmbed = new LiveboardEmbed('#ts-embed', {
+            frameParams: {
+                width: '100%',
+                height: '100%',
+            },
+            liveboardId: 'd084c256-e284-4fc4-b80c-111cb606449a', // Replace with your actual Liveboard ID
+        });
+
+        // Do not forget to call render
+        liveboardEmbed.render();
+    </script>
 
 </body>
 </html>
